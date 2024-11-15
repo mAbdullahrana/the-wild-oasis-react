@@ -1,1 +1,1 @@
-The Wild Oasis is a hotel mangement system that allow users to manage their hotel cabins,guests bookings, and to save guests data.React is used as frontend technology, React query for global state manegement, Styled components for styling and supabase as backend
+The Wild Oasis is a hotel management system that allows users to manage hotel cabins, guest bookings, and save guest data. React is used for the frontend, React Query for global state management, Styled Components for styling, and Supabase as the backend
