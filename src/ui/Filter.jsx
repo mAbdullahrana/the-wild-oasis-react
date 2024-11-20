@@ -44,6 +44,10 @@ function Filter({ filterField, options }) {
   function handleClick(value) {
     // Setting the params in the url
     searchParams.set(filterField, value);
+
+    // Reseting the page to 1
+    searchParams.set("page", 1);
+
     setSearchParams(searchParams);
   }
 

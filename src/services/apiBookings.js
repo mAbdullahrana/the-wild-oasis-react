@@ -1,16 +1,39 @@
+import { PAGE_SIZE } from "../utils/constants.js";
 import { getToday } from "../utils/helpers";
 import supabase from "./supabase";
 
-export async function getBookings() {
-  const { data, error } = await supabase
+export async function getBookings(filter, sortBy, page) {
+  let query = supabase
     .from("bookings")
-    .select("*, cabins(*) , guests(*)");
+    .select("*, cabins(*) , guests(*)", { count: "exact" });
+
+  // if (filter !== null) query = query.eq(filter.field, filter.value);
+  //  Fiteing Api
+  if (filter !== null)
+    query = query[filter.method || "eq"](filter.field, filter.value);
+
+  // Sorting Data in Api
+  if (sortBy)
+    query.order(sortBy.field, {
+      ascending: sortBy.direction === "asc",
+    });
+
+  // Pagination in API
+
+  if (page) {
+    const from = (page - 1) * PAGE_SIZE;
+    const to = from + PAGE_SIZE - 1;
+
+    query = query.range(from, to);
+  }
+
+  const { data, error, count } = await query;
 
   if (error) {
     throw new Error("Cabins could not be loaded");
   }
 
-  return data;
+  return { data, count };
 }
 
 export async function getBooking(id) {
