@@ -31,7 +31,6 @@ function BookingDetail() {
 
   const moveBack = useMoveBack();
 
-  console.log(booking);
 
   const { status, id: bookingId } = booking;
 

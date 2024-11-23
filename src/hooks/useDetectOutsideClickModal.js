@@ -6,9 +6,7 @@ export function useDetectOutsideClickModal(handler, listenInCapturing = true) {
   useEffect(() => {
     function handleOutsideClick(e) {
       if (ref.current && !ref.current.contains(e.target)) {
-        e.stopPropagation();
         handler();
-        
       }
     }
 
