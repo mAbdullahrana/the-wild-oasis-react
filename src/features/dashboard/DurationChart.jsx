@@ -1,4 +1,11 @@
-import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from "recharts";
+import {
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 import styled from "styled-components";
 import Heading from "../../ui/Heading.jsx";
 import { useDarkModeToggle } from "../../context/DarkModeToggle.jsx";
@@ -135,15 +142,15 @@ function prepareData(startData, stays) {
   return data;
 }
 
-function DurationChart({confirmedStays}) {
-  const {isDark} = useDarkModeToggle()
+function DurationChart({ confirmedStays }) {
+  const { isDark } = useDarkModeToggle();
   const startData = isDark ? startDataDark : startDataLight;
-  const data = prepareData(startData , confirmedStays)
+  const data = prepareData(startData, confirmedStays);
 
   return (
     <ChartBox>
       <Heading as="h2">Stay duration summary</Heading>
-      <ResponsiveContainer width='100%' height={240}>
+      <ResponsiveContainer width="100%" height={240}>
         <PieChart>
           <Pie
             data={data}
@@ -163,9 +170,16 @@ function DurationChart({confirmedStays}) {
               />
             ))}
           </Pie>
-      
 
-      <Legend  verticalAlign="middle" align="right" width='35%' layout="vertical" iconSize={7} iconType="circle"/>
+          <Tooltip />
+          <Legend
+            verticalAlign="middle"
+            align="right"
+            width="30%"
+            layout="vertical"
+            iconSize={15}
+            iconType="circle"
+          />
         </PieChart>
       </ResponsiveContainer>
     </ChartBox>
